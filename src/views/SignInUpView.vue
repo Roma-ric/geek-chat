@@ -3,22 +3,22 @@
     <div class="d-flex justify-content-around align-items-center flex-lg-row flex-md-row flex-column col-12 my-5">
       <div class="col-lg-4 col-md-5">
         <h1 class="text-warning mb-4 fs-1"> Geek<sub class="fs-2 text-primary">Chat</sub> </h1>
-        <p class="fs-5"> La plateforme de communication entre les différents <strong>Geek</strong> de notre
+        <p class="fs-5 text-light"> La plateforme de communication entre les différents <strong>Geek</strong> de notre
           communauté. </p>
       </div>
       <div class="col-lg-4 col-md-5 col-12">
-        <Form @submit="onSignIn" :validation-schema="schema()" class="card shadow p-2 ">
+        <Form @submit="onSignIn" :validation-schema="schema()" class="card bg-light shadow p-2 ">
 
-          <h4 class="fw-bold"> Connexion </h4>
+          <h4 class="fw-bold text-dark"> Connexion </h4>
 
-          <Field type="text" name="pseudo" id="pseudoI" class="form-control mb-1" placeholder="Pseudo" />
+          <Field type="text" name="pseudo" id="pseudoI" class="border border-1 rounded form-control mb-1 text-dark p-1" placeholder="Pseudo" />
           <ErrorMessage name="pseudo" class="mb-1 text-start text-danger" />
 
-          <div class="d-flex border border-1 rounded mb-1 d-flex justify-content-center align-items-center">
+          <div class="d-flex border border-1 rounded mb-1 justify-content-between align-items-center">
             <Field type="password" name="motDePasse" id="motDePasseI" placeholder="Mot de passe"
-              class="form-control border-0" />
+              class="form-control border-0 text-dark px-1" />
             <span @click="changePasswordVisibility" id="passwordVisibility"
-              class="material-symbols-outlined d-flex justify-content-center align-items-center"
+              class="material-symbols-outlined d-flex justify-content-center align-items-center text-dark"
               style="width: 30px; height: 30px;"> {{ v }} </span>
           </div>
           <ErrorMessage name="motDePasse" class="mb-2 text-start text-danger" />
@@ -44,25 +44,25 @@
         </div>
         <div class="modal-body text-start">
           <Form @submit="onSignUp" :validation-schema="schema()">
-            <Field type="text" name="nom" id="nomU" class="form-control mb-1" placeholder="Nom" />
+            <Field type="text" name="nom" id="nomU" class="form-control mb-1 border border-1 px-1 rounded" placeholder="Nom" />
             <ErrorMessage name="nom" class="mb-1 text-start text-danger" />
 
-            <Field type="text" name="prenom" id="prenomU" class="form-control mb-1" placeholder="Prénom(s)" />
+            <Field type="text" name="prenom" id="prenomU" class="form-control mb-1 border border-1 px-1 rounded" placeholder="Prénom(s)" />
             <ErrorMessage name="prenom" class="mb-1 text-start text-danger" />
 
-            <Field type="text" name="pseudo" id="pseudoU" class="form-control mb-1" placeholder="Pseudo" />
+            <Field type="text" name="pseudo" id="pseudoU" class="form-control mb-1 border border-1 px-1 rounded" placeholder="Pseudo" />
             <ErrorMessage name="pseudo" class="mb-1 text-start text-danger" />
 
-            <Field type="email" name="adresseEmail" id="adresseEmail" class="form-control mb-1"
+            <Field type="email" name="adresseEmail" id="adresseEmail" class="form-control mb-1 border border-1 px-1 rounded"
               placeholder="Adresse e-mail" />
             <ErrorMessage name="adresseEmail" class="mb-1 text-start text-danger" />
 
-            <Field type="text" name="imgProfil" id="imgProfil" class="form-control mb-1" readOnly value="/images" />
+            <Field type="text" name="imgProfil" id="imgProfil" class="form-control mb-1 border border-1 px-1 rounded" readOnly value="/images" />
             <ErrorMessage name="imgProfil" class="mb-1 text-start text-danger" />
 
-            <div class="d-flex border border-1 rounded mb-1 d-flex justify-content-center align-items-center">
+            <div class="d-flex border border-1 rounded mb-1 justify-content-between align-items-center">
               <Field type="password" name="motDePasse" id="motDePasseU" placeholder="Mot de passe"
-                class="form-control border-0" />
+                class="form-control border-0 px-1" />
               <span @click="changePasswordVisibility" id="passwordVisibility"
                 class="material-symbols-outlined d-flex justify-content-center align-items-center"
                 style="width: 30px; height: 30px;"> {{ v }} </span>
@@ -145,7 +145,7 @@ export default {
       if (this.users && this.$store.state.users["users"]) {
         const userIndex = this.$store.state.users["users"].findIndex(user => user.pseudo === pseudoInput && user.motDePasse === motDePasseInput);
         const user = this.$store.state.users["users"].find(user => user.pseudo === pseudoInput && user.motDePasse === motDePasseInput);
-        
+
         if (userIndex !== -1) {
           this.$store.commit('UPDATE_USERONLINE', true);
           window.localStorage.setItem("userPseudo", pseudoInput);
