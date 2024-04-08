@@ -22,3 +22,13 @@ yarn lint
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).
+
+### Create a new app and Install dependencies
+```
+vue create app_name
+vue add vuex
+vue add router
+yarn add vee-validate
+yarn add yup
+```
+<!-- yarn add vue-router -->

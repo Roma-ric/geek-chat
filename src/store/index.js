@@ -7,7 +7,9 @@ export default createStore({
     groupes: [],
     userOnline: true
   },
-  getters: {},
+  getters: {
+
+  },
   mutations: {
     // 
     UPDATE_USERONLINE(state, payload) {
@@ -65,6 +67,10 @@ export default createStore({
       state.groupes = state.groupes.filter(groupe => groupe.idUser !== idUser);
     }
   },
-  actions: {},
-  modules: {},
+  actions: {
+
+  },
+  modules: {
+    
+  },
 });

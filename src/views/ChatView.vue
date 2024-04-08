@@ -2,27 +2,26 @@
     <section>
         <!-- lg and md -->
         <header class="card m-0 shadow-sm d-lg-flex d-md-flex d-none flex-row justify-content-between px-3 py-2">
-            <a href="#"><img src="../assets/GC_logo.png" alt="" width="40" height="40" style="border-radius: 5px;"/></a>
-            <span class="text-light rounded material-symbols-outlined d-flex justify-content-center align-items-center border"
-                type="button" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menu"
+            <a href="#"><img src="../assets/GC_logo.png" alt="" width="40" height="40"
+                    style="border-radius: 5px;" /></a>
+            <span
+                class="text-light rounded material-symbols-outlined d-flex justify-content-center align-items-center border"
+                type="button" data-bs-toggle="offcanvas" data-bs-target="#groupes" aria-controls="groupes"
                 style="width: 40px; height: 40px;"> settings </span>
         </header>
         <!-- <= sm -->
         <header class="card m-0 shadow-sm d-lg-none d-md-none d-flex flex-row justify-content-between px-2 py-2">
             <a href="#"><img src="../assets/GC_logo.png" alt="" width="40" height="40" /></a>
             <div class="d-flex justify-content-center align-items-center">
-                <button class="btn btn-primary mx-2 d-flex justify-content-center align-items-center" type="button"
-                    data-bs-toggle="offcanvas" data-bs-target="#groupes" aria-controls="groupes"
-                    style="width: 40px;height: 40px;"> <span class="material-symbols-outlined"> forum </span>
-                </button>
-                <span class="text-light material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
-                    type="button" data-bs-toggle="offcanvas" data-bs-target="#menu" aria-controls="menu"
+                <span
+                    class="text-light material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
+                    type="button" data-bs-toggle="offcanvas" data-bs-target="#groupes" aria-controls="groupes"
                     style="width: 40px; height: 40px;"> settings </span>
             </div>
         </header>
         <div class="d-flex align-items-start text-dark">
-            <div class="nav d-lg-flex d-md-flex d-none flex-column nav-pills col-lg-3 col-md-4"
-                id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <div class="nav d-lg-flex d-md-flex d-none flex-column nav-pills col-lg-3 col-md-4" id="v-pills-tab"
+                role="tablist" aria-orientation="vertical">
                 <div class="bg-light d-flex flex-row card shadow rounded-pill m-2 p-1">
                     <span
                         class="material-symbols-outlined d-flex justify-content-center align-items-center text-primary"
@@ -54,7 +53,8 @@
                         <div style="height: 9vh;"
                             class="m-0 card rounded-0 d-flex flex-row justify-content-between align-items-center p-1">
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="../assets/GC_logo.png" alt="" width="50" height="50" class="rounded rounded-circle">
+                                <img src="../assets/GC_logo.png" alt="" width="50" height="50"
+                                    class="rounded rounded-circle">
                                 <div class="d-flex flex-column mx-3">
                                     <h6 class="fw-bold text-light"> Développement web frontend </h6>
                                 </div>
@@ -67,14 +67,16 @@
                             <div v-for="message in this.$store.state.messages['messages']" :key="message.idMessage">
                                 <div v-if="message.idGroupe === 1 && message.pseudoUser !== currentUserPseudo">
                                     <p class="text-start my-0"> {{ message.pseudoUser }} </p>
-                                    <div class="m-0 card px-2 py-1 bg-warning mb-1 col-lg-6 col-md-8 col-10 text-dark text-start"
+                                    <div
+                                        class="m-0 card px-2 py-1 bg-warning mb-1 col-lg-6 col-md-8 col-10 text-dark text-start"
                                         style="border-radius: 15px;">
                                         {{ message.texte }}
                                     </div>
                                 </div>
                                 <div v-if="message.idGroupe === 1 && message.pseudoUser === currentUserPseudo"
                                     class="col-12 d-flex justify-content-end">
-                                    <div class="m-0 card px-2 py-1 bg-primary mb-1 col-lg-6 col-md-8 col-10 text-light text-end"
+                                    <div @dblclick="(e) => updateMessageGroupe1(e.target.innerHTML)"
+                                        class="m-0 card px-2 py-1 bg-primary mb-1 col-lg-6 col-md-8 col-10 text-light text-end"
                                         style="border-radius: 15px;">
                                         {{ message.texte }}
                                     </div>
@@ -96,7 +98,8 @@
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
-                            <input type="text" name="message" id="message" class="bg-light form-control rounded rounded-pill">
+                            <input type="text" name="message" id="message"
+                                class="bg-light form-control rounded rounded-pill">
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
@@ -110,7 +113,7 @@
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
-                            <input type="text" name="" id="" class="bg-light form-control rounded rounded-pill">
+                            <input type="text" name="message" id="message" class="bg-light form-control rounded rounded-pill">
                             <span
                                 class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> send </span>
@@ -122,7 +125,8 @@
                         <div style="height: 9vh;"
                             class="rounded-0 m-0 card d-flex flex-row justify-content-between align-items-center p-1">
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="../assets/GC_logo.png" alt="" width="50" height="50" class="rounded rounded-circle">
+                                <img src="../assets/GC_logo.png" alt="" width="50" height="50"
+                                    class="rounded rounded-circle">
                                 <div class="d-flex flex-column mx-3">
                                     <h6 class="fw-bold text-light"> Développement web backend </h6>
                                 </div>
@@ -164,7 +168,8 @@
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
-                            <input type="text" name="message2" id="message2" class="bg-light form-control rounded rounded-pill">
+                            <input type="text" name="message2" id="message2"
+                                class="bg-light form-control rounded rounded-pill">
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
@@ -190,14 +195,14 @@
     </section>
     <!-- Offcanvas -->
     <!-- Groupes -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="groupes" aria-labelledby="offcanvasRightLabel">
+    <div class="offcanvas offcanvas-end bg-light" tabindex="-1" id="groupes" aria-labelledby="offcanvasRightLabel">
         <div class="offcanvas-header">
             <h5 id="offcanvasRightLabel" class="fw-bold"> Groupes </h5>
             <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
         </div>
-        <div class="offcanvas-body">
-            <div class="nav d-flex flex-column nav-pills" id="v-pills-tab" role="tablist"
-                aria-orientation="vertical">
+        <div class="offcanvas-body d-flex flex-column justify-content-between">
+            <div class="nav d-flex flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                <h4 class="text-start"> {{ currentUser }} </h4>
                 <div class="bg-light d-flex flex-row card shadow rounded-pill m-2">
                     <span class="text-dark material-symbols-outlined d-flex justify-content-center align-items-center"
                         style="width: 35px; height: 35px;"> search </span>
@@ -221,23 +226,12 @@
                     </div>
                 </button>
             </div>
-        </div>
-    </div>
-    <!-- Menu -->
-    <div class="offcanvas offcanvas-end" tabindex="-1" id="menu" aria-labelledby="offcanvasRightLabel">
-        <div class="offcanvas-header">
-            <h5 id="offcanvasRightLabel" class="fw-bold"> Menu </h5>
-            <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-        </div>
-        <div class="offcanvas-body d-flex flex-column justify-content-between">
-            <h4 class="text-start"> {{ currentUser }} </h4>
             <button @click="logOut" class="btn btn-primary mx-auto"> Deconnexion </button>
         </div>
     </div>
 </template>
 
 <script>
-
 export default {
     name: "GeekChat",
     components: {
@@ -266,6 +260,7 @@ export default {
                 .then((response) => response.json())
                 .then(() => {
                     document.getElementById("message").value = "";
+                    // this.$store.commit('ADD_MESSAGES', response);
                     window.location.href = "/chat";
                 })
                 .catch(error => {
@@ -288,12 +283,46 @@ export default {
                 .then((response) => response.json())
                 .then(() => {
                     document.getElementById("message").value = "";
+                    // this.$store.commit('ADD_MESSAGES', response);
                     window.location.href = "/chat";
                 })
                 .catch(error => {
                     alert("Le champ ne doit pas rester vide");
                     console.log('Error creating user:', error);
                 });
+        },
+        updateMessageGroupe1(messageRecup) {
+            //recuperer le message
+            messageRecup
+            //retrouver le message
+            const message = this.$store.state.messages["messages"].find((message) => message.texte === messageRecup);
+            // alert(JSON.stringify(message, null, 2))
+            // modifier le message
+            // prompt("Modifier le message", messageRecup);
+
+            if (message.pseudoUser === this.currentUserPseudo) {
+
+                // modifier le message
+                prompt("Modifier le message", messageRecup);
+                // const newMessage = prompt("Modifier le message", messageRecup);
+
+                // fetch(`http://localhost:3010/messages/${message.id}`, {
+                //     method: 'PATCH',
+                //     body: JSON.stringify({
+                //         texte: newMessage
+                //     })
+                // })
+                //     .then((response) => response.json())
+                //     .then(() => {
+                //         // this.$store.commit('UPDATE_MESSAGES', response);
+                //         // window.location.href = "/chat";
+                //     })
+                //     .catch(error => {
+                //         // alert("Le champ ne doit pas rester vide");
+                //         console.log('Error updating user:', error);
+                //     });
+            }
+
         },
         logOut() {
             window.localStorage.setItem("userPseudo", "");

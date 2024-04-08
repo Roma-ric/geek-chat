@@ -12,7 +12,7 @@ const routes = [
     path: "/chat",
     name: "GeekChat",
     component: () => import("../views/ChatView.vue"),
-    meta: { requiresCondition: true }, // Ajoutez une meta propriété pour indiquer que la route nécessite la condition acceptée
+    // meta: { requiresCondition: true }, // Ajoutez une meta propriété pour indiquer que la route nécessite la condition acceptée
   },
 ];
 
