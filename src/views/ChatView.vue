@@ -67,15 +67,15 @@
                             <div v-for="message in this.$store.state.messages['messages']" :key="message.idMessage">
                                 <div v-if="message.idGroupe === 1 && message.pseudoUser !== currentUserPseudo">
                                     <p class="text-start my-0"> {{ message.pseudoUser }} </p>
-                                    <div
-                                        class="m-0 card px-2 py-1 bg-warning mb-1 col-lg-6 col-md-8 col-10 text-dark text-start"
+                                    <div class="m-0 card px-2 py-1 bg-warning mb-1 col-lg-6 col-md-8 col-10 text-dark text-start"
                                         style="border-radius: 15px;">
                                         {{ message.texte }}
                                     </div>
                                 </div>
                                 <div v-if="message.idGroupe === 1 && message.pseudoUser === currentUserPseudo"
                                     class="col-12 d-flex justify-content-end">
-                                    <div @dblclick="(e) => updateMessageGroupe1(e.target.innerHTML)"
+                                    <div @dblclick="updateMessageGroupe1($event.target.innerHTML)"
+                                        @mousedown="startLongPress($event.target.innerHTML)" @mouseup="cancelLongPress"
                                         class="m-0 card px-2 py-1 bg-primary mb-1 col-lg-6 col-md-8 col-10 text-light text-end"
                                         style="border-radius: 15px;">
                                         {{ message.texte }}
@@ -113,7 +113,8 @@
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
-                            <input type="text" name="message" id="message" class="bg-light form-control rounded rounded-pill">
+                            <input type="text" name="message" id="message"
+                                class="bg-light form-control rounded rounded-pill">
                             <span
                                 class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> send </span>
@@ -183,7 +184,8 @@
                             <span
                                 class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
-                            <input type="text" name="" id="" class="text-light form-control rounded rounded-pill">
+                            <input type="text" name="" id=""
+                                class="bg-light text-light form-control rounded rounded-pill">
                             <span
                                 class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> send </span>
@@ -292,37 +294,67 @@ export default {
                 });
         },
         updateMessageGroupe1(messageRecup) {
-            //recuperer le message
-            messageRecup
             //retrouver le message
             const message = this.$store.state.messages["messages"].find((message) => message.texte === messageRecup);
             // alert(JSON.stringify(message, null, 2))
-            // modifier le message
-            // prompt("Modifier le message", messageRecup);
 
             if (message.pseudoUser === this.currentUserPseudo) {
 
                 // modifier le message
-                prompt("Modifier le message", messageRecup);
-                // const newMessage = prompt("Modifier le message", messageRecup);
+                const newMessage = prompt(`Modifier le message: ${message.idMessage}`, messageRecup);
 
-                // fetch(`http://localhost:3010/messages/${message.id}`, {
-                //     method: 'PATCH',
-                //     body: JSON.stringify({
-                //         texte: newMessage
-                //     })
-                // })
-                //     .then((response) => response.json())
-                //     .then(() => {
-                //         // this.$store.commit('UPDATE_MESSAGES', response);
-                //         // window.location.href = "/chat";
-                //     })
-                //     .catch(error => {
-                //         // alert("Le champ ne doit pas rester vide");
-                //         console.log('Error updating user:', error);
-                //     });
+                fetch(`http://localhost:3010/messages/${message.idMessage}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        texte: newMessage
+                    })
+                })
+                    .then((response) => { return response.json(); })
+                    .then(() => {
+                        // this.$store.commit('UPDATE_MESSAGES', data);
+                        window.location.href = "/chat";
+                    })
+                    .catch(error => {
+                        // Gérer les erreurs ici
+                        console.error('Error updating message:', error);
+                    });
+
             }
 
+        },
+        startLongPress(messageRecup) {
+            this.pressTimer = setTimeout(() => {
+                // Code à exécuter en cas d'appui long
+                // Retrouver le message
+                const message = this.$store.state.messages["messages"].find((message) => message.texte === messageRecup);
+
+                if (message.pseudoUser === this.currentUserPseudo) {
+                    // Demander confirmation à l'utilisateur
+                    const confirmation = window.confirm("Voulez-vous supprimer le message ?");
+
+                    // Si l'utilisateur confirme la suppression
+                    if (confirmation) {
+                        fetch(`http://localhost:3010/messages/${message.idMessage}`, {
+                            method: 'DELETE',
+                        })
+                            .then((response) => {return response.json()})
+                            .then(() => {
+                                // this.$store.commit('UPDATE_MESSAGES', data);
+                                window.location.href = "/chat";
+                            })
+                            .catch(error => {
+                                // Gérer les erreurs ici
+                                console.error('Error deleting message:', error);
+                            });
+                    }
+                }
+            }, 1000); // Durée de l'appui long en millisecondes (1 seconde dans cet exemple)
+        },
+        cancelLongPress() {
+            clearTimeout(this.pressTimer);
         },
         logOut() {
             window.localStorage.setItem("userPseudo", "");
