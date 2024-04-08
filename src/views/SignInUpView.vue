@@ -11,19 +11,19 @@
 
           <h4 class="fw-bold text-dark"> Connexion </h4>
 
-          <Field type="text" name="pseudo" id="pseudoI" class="border border-1 rounded form-control mb-1 text-dark p-1" placeholder="Pseudo" />
+          <Field type="text" name="pseudo" id="pseudoI" class="border border-1 rounded text-dark form-control mb-1 text-dark p-1" placeholder="Pseudo" />
           <ErrorMessage name="pseudo" class="mb-1 text-start text-danger" />
 
           <div class="d-flex border border-1 rounded mb-1 justify-content-between align-items-center">
             <Field type="password" name="motDePasse" id="motDePasseI" placeholder="Mot de passe"
-              class="form-control border-0 text-dark px-1" />
+              class="text-dark form-control border-0 text-dark px-1" />
             <span @click="changePasswordVisibility" id="passwordVisibility"
               class="material-symbols-outlined d-flex justify-content-center align-items-center text-dark"
               style="width: 30px; height: 30px;"> {{ v }} </span>
           </div>
           <ErrorMessage name="motDePasse" class="mb-2 text-start text-danger" />
 
-          <button @click="onSignIn" type="submit" class="btn btn-primary mt-2"> Envoyer </button>
+          <button @click="onSignIn" type="submit" class="btn btn-primary mt-2"> Se connecter </button>
 
           <a href="" class="text-primary my-2"> Mot de passe oublié ? </a>
 
@@ -44,25 +44,25 @@
         </div>
         <div class="modal-body text-start">
           <Form @submit="onSignUp" :validation-schema="schema()">
-            <Field type="text" name="nom" id="nomU" class="form-control mb-1 border border-1 px-1 rounded" placeholder="Nom" />
+            <Field type="text" name="nom" id="nomU" class="text-dark form-control mb-1 border border-1 px-1 rounded" placeholder="Nom" />
             <ErrorMessage name="nom" class="mb-1 text-start text-danger" />
 
-            <Field type="text" name="prenom" id="prenomU" class="form-control mb-1 border border-1 px-1 rounded" placeholder="Prénom(s)" />
+            <Field type="text" name="prenom" id="prenomU" class="text-dark form-control mb-1 border border-1 px-1 rounded" placeholder="Prénom(s)" />
             <ErrorMessage name="prenom" class="mb-1 text-start text-danger" />
 
-            <Field type="text" name="pseudo" id="pseudoU" class="form-control mb-1 border border-1 px-1 rounded" placeholder="Pseudo" />
+            <Field type="text" name="pseudo" id="pseudoU" class="text-dark form-control mb-1 border border-1 px-1 rounded" placeholder="Pseudo" />
             <ErrorMessage name="pseudo" class="mb-1 text-start text-danger" />
 
-            <Field type="email" name="adresseEmail" id="adresseEmail" class="form-control mb-1 border border-1 px-1 rounded"
+            <Field type="email" name="adresseEmail" id="adresseEmail" class="text-dark form-control mb-1 border border-1 px-1 rounded"
               placeholder="Adresse e-mail" />
             <ErrorMessage name="adresseEmail" class="mb-1 text-start text-danger" />
 
-            <Field type="text" name="imgProfil" id="imgProfil" class="form-control mb-1 border border-1 px-1 rounded" readOnly value="/images" />
+            <Field type="text" name="imgProfil" id="imgProfil" class="text-dark form-control mb-1 border border-1 px-1 rounded" readOnly value="/images" />
             <ErrorMessage name="imgProfil" class="mb-1 text-start text-danger" />
 
             <div class="d-flex border border-1 rounded mb-1 justify-content-between align-items-center">
               <Field type="password" name="motDePasse" id="motDePasseU" placeholder="Mot de passe"
-                class="form-control border-0 px-1" />
+                class="text-dark form-control border-0 px-1" />
               <span @click="changePasswordVisibility" id="passwordVisibility"
                 class="material-symbols-outlined d-flex justify-content-center align-items-center"
                 style="width: 30px; height: 30px;"> {{ v }} </span>

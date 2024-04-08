@@ -51,17 +51,17 @@
                 <div class="tab-pane fade show active" id="frontend" role="cabpanel" aria-labelledby="frontend-tab">
                     <div class="d-flex flex-column">
                         <div style="height: 9vh;"
-                            class="m-0 card rounded-0 d-flex flex-row justify-content-between align-items-center p-1">
+                            class="m-0 card rounded-0 d-flex flex-row justify-content-center align-items-center p-1">
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="../assets/GC_logo.png" alt="" width="50" height="50"
-                                    class="rounded rounded-circle">
+                                <!-- <img src="../assets/GC_logo.png" alt="" width="50" height="50"
+                                    class="rounded rounded-circle"> -->
                                 <div class="d-flex flex-column mx-3">
                                     <h6 class="fw-bold text-light"> Développement web frontend </h6>
                                 </div>
                             </div>
-                            <span
+                            <!-- <span
                                 class="material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
-                                style="width: 40px; height: 40px;"> </span>
+                                style="width: 40px; height: 40px;"> </span> -->
                         </div>
                         <div style="height: 74vh;" class="m-0 overflow-auto d-flex flex-column p-2">
                             <div v-for="message in this.$store.state.messages['messages']" :key="message.idMessage">
@@ -87,21 +87,15 @@
                         <div style="height: 8vh;"
                             class="rounded-0 m-0 card d-lg-flex d-md-flex d-none flex-row justify-content- align-items-center p-1">
                             <span
-                                class="material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
-                                style="width: 40px; height: 40px;"> </span>
+                                class="text-light material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
+                                style="width: 40px; height: 40px;"> attach_file </span>
                             <span
-                                class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
-                                style="width: 40px; height: 40px;"> </span>
-                            <span
-                                class="material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
-                                style="width: 40px; height: 40px;"> </span>
-                            <span
-                                class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
+                                class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
                             <input type="text" name="message" id="message"
                                 class="bg-light form-control rounded rounded-pill">
                             <span
-                                class="material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
+                                class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
                             <span @click="sendMessageGroupe1"
                                 class="text-light material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
@@ -124,17 +118,17 @@
                 <div class="tab-pane fade" id="backend" role="tabpanel" aria-labelledby="backend-tab">
                     <div class="d-flex flex-column">
                         <div style="height: 9vh;"
-                            class="rounded-0 m-0 card d-flex flex-row justify-content-between align-items-center p-1">
+                            class="m-0 card rounded-0 d-flex flex-row justify-content-center align-items-center p-1">
                             <div class="d-flex justify-content-between align-items-center">
-                                <img src="../assets/GC_logo.png" alt="" width="50" height="50"
-                                    class="rounded rounded-circle">
+                                <!-- <img src="../assets/GC_logo.png" alt="" width="50" height="50"
+                                    class="rounded rounded-circle"> -->
                                 <div class="d-flex flex-column mx-3">
                                     <h6 class="fw-bold text-light"> Développement web backend </h6>
                                 </div>
                             </div>
-                            <span
+                            <!-- <span
                                 class="material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
-                                style="width: 40px; height: 40px;"> </span>
+                                style="width: 40px; height: 40px;"> </span> -->
                         </div>
                         <div style="height: 74vh;" class="m-0 overflow-auto d-flex flex-column p-2">
                             <div v-for="message in this.$store.state.messages['messages']" :key="message.idMessage">
@@ -313,9 +307,9 @@ export default {
                     })
                 })
                     .then((response) => { return response.json(); })
-                    .then(() => {
-                        // this.$store.commit('UPDATE_MESSAGES', data);
-                        window.location.href = "/chat";
+                    .then((data) => {
+                        this.$store.commit('UPDATE_MESSAGES', data);
+                        // window.location.href = "/chat";
                     })
                     .catch(error => {
                         // Gérer les erreurs ici
@@ -340,10 +334,10 @@ export default {
                         fetch(`http://localhost:3010/messages/${message.idMessage}`, {
                             method: 'DELETE',
                         })
-                            .then((response) => {return response.json()})
+                            .then((response) => { return response.json() })
                             .then(() => {
-                                // this.$store.commit('UPDATE_MESSAGES', data);
-                                window.location.href = "/chat";
+                                this.$store.commit('DELETE_MESSAGES', message.idMessage);
+                                // window.location.href = "/chat";
                             })
                             .catch(error => {
                                 // Gérer les erreurs ici

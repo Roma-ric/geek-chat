@@ -30,5 +30,5 @@ vue add vuex
 vue add router
 yarn add vee-validate
 yarn add yup
+yarn add vue-router
 ```
-<!-- yarn add vue-router -->
