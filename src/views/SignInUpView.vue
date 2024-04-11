@@ -83,6 +83,7 @@
 import { Form, Field, ErrorMessage } from 'vee-validate';
 import * as yup from 'yup';
 import { configure } from 'vee-validate'
+import router from '@/router'; 
 
 configure({
   validateOnBlur: true,
@@ -124,20 +125,6 @@ export default {
         imgProfil: yup.string().required("La photo de profil est requis."),
       })
     },
-    // onSignIn() {
-    //   alert(JSON.stringify(this.users["users"], null, 2));
-    //   alert(JSON.stringify({
-    //     pseudo: document.getElementById("pseudoI").value,
-    //     motDePasse: document.getElementById("motDePasseI").value
-    //   }, null, 2));
-    //   const user = this.users["users"].findIndex((user) => { user.pseudo === document.getElementById("pseudoI").value && user.motDePasse === document.getElementById("motDePasse").value });
-    //   if (user) {
-    //     window.localStorage.setItem("userPseudo", document.getElementById("pseudoI").value);
-    //     window.location.href = `/chat`;
-    //   } else {
-    //     alert("Pseudo ou Mot de passe incorrect!");
-    //   }
-    // },
     onSignIn() {
       const pseudoInput = document.getElementById("pseudoI").value;
       const motDePasseInput = document.getElementById("motDePasseI").value;
@@ -147,10 +134,10 @@ export default {
         const user = this.$store.state.users["users"].find(user => user.pseudo === pseudoInput && user.motDePasse === motDePasseInput);
 
         if (userIndex !== -1) {
-          this.$store.commit('UPDATE_USERONLINE', true);
           window.localStorage.setItem("userPseudo", pseudoInput);
+          // window.userPseudo = pseudoInput;
           window.localStorage.setItem("user", user.nom + " " + user.prenom);
-          window.location.href = `/chat`;
+          router.push('/chat');
         } else {
           alert("Pseudo ou Mot de passe incorrect!");
         }
@@ -169,7 +156,7 @@ export default {
         .then((response) => response.json())
         .then(() => {
           alert("Inscription validée avec succès.");
-          window.location.href = "/";
+          router.push('/');
         })
         .catch(error => {
           console.log('Error creating user:', error);

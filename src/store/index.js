@@ -5,7 +5,6 @@ export default createStore({
     users: [],
     messages: [],
     groupes: [],
-    userOnline: true
   },
   getters: {
 
@@ -21,16 +20,16 @@ export default createStore({
       state.messages = payload;
     },
     ADD_MESSAGES(state, messages){
-      state.messages.push(messages);
+      state.messages['messages'].push(messages);
     },
     UPDATE_MESSAGES(state, updatedMessage){
-      const index = state.messages.findIndex(message => message.idMessage === updatedMessage.idMessage);
+      const index = state.messages['messages'].findIndex(message => message.idMessage === updatedMessage.idMessage);
       if (index !== -1) {
-        state.messages.splice(index, 1, updatedMessage);
+        state.messages['messages'].splice(index, 1, updatedMessage);
       }
     },
     DELETE_MESSAGES(state, idMessage){
-      state.messages = state.messages.filter(message => message._id !== idMessage);
+      state.messages['messages'] = state.messages['messages'].filter(message => message._id !== idMessage);
     },
 
     // GROUPES

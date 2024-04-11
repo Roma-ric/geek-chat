@@ -228,6 +228,8 @@
 </template>
 
 <script>
+import router from '@/router';
+
 export default {
     name: "GeekChat",
     components: {
@@ -254,10 +256,10 @@ export default {
                 })
             })
                 .then((response) => response.json())
-                .then(() => {
+                .then((data) => {
                     document.getElementById("message").value = "";
-                    // this.$store.commit('ADD_MESSAGES', response);
-                    window.location.href = "/chat";
+                    this.$store.commit('ADD_MESSAGES', data);
+                    router.push('/chat');
                 })
                 .catch(error => {
                     alert("Le champ ne doit pas rester vide");
@@ -279,8 +281,7 @@ export default {
                 .then((response) => response.json())
                 .then(() => {
                     document.getElementById("message").value = "";
-                    // this.$store.commit('ADD_MESSAGES', response);
-                    window.location.href = "/chat";
+                    router.push('/chat');
                 })
                 .catch(error => {
                     alert("Le champ ne doit pas rester vide");
@@ -309,7 +310,6 @@ export default {
                     .then((response) => { return response.json(); })
                     .then((data) => {
                         this.$store.commit('UPDATE_MESSAGES', data);
-                        // window.location.href = "/chat";
                     })
                     .catch(error => {
                         // Gérer les erreurs ici
@@ -337,7 +337,7 @@ export default {
                             .then((response) => { return response.json() })
                             .then(() => {
                                 this.$store.commit('DELETE_MESSAGES', message.idMessage);
-                                // window.location.href = "/chat";
+                                router.push('/chat');
                             })
                             .catch(error => {
                                 // Gérer les erreurs ici
@@ -351,8 +351,9 @@ export default {
             clearTimeout(this.pressTimer);
         },
         logOut() {
-            window.localStorage.setItem("userPseudo", "");
-            window.location.href = "/";
+            window.localStorage.clear();
+            // window.userPseudo = null;
+            router.replace("/");
         },
         handleKeyPress1(event) {
             if (event.keyCode === 13) {
