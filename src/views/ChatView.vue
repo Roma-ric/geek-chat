@@ -93,7 +93,7 @@
                                 class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
                             <input type="text" name="message" id="message"
-                                class="bg-light form-control rounded rounded-pill">
+                                class="bg-light text-dark form-control rounded rounded-pill">
                             <span
                                 class="text-light material-symbols-outlined mx-2 d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span>
@@ -244,27 +244,32 @@ export default {
     },
     methods: {
         sendMessageGroupe1() {
-            fetch(`http://localhost:3010/messages`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    texte: document.getElementById("message").value,
-                    idGroupe: 1,
-                    pseudoUser: window.localStorage.getItem("userPseudo"),
+            if ((document.getElementById("message").value).trim() === "") {
+                alert("le champ est vide...");
+                document.getElementById("message").value = null;
+            } else {
+                fetch(`http://localhost:3010/messages`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        texte: document.getElementById("message").value,
+                        idGroupe: 1,
+                        pseudoUser: window.localStorage.getItem("userPseudo"),
+                    })
                 })
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    document.getElementById("message").value = null;
-                    this.$store.commit('ADD_MESSAGES', data);
-                    router.push('/chat');
-                })
-                .catch(error => {
-                    alert("Le champ ne doit pas rester vide");
-                    console.log('Error creating user:', error);
-                });
+                    .then((response) => response.json())
+                    .then((data) => {
+                        document.getElementById("message").value = null;
+                        this.$store.commit('ADD_MESSAGES', data);
+                        router.push('/chat');
+                    })
+                    .catch(error => {
+                        alert("Le champ ne doit pas rester vide");
+                        console.log('Error creating user:', error);
+                    });
+            }
         },
         sendMessageGroupe2() {
             fetch(`http://localhost:3010/messages`, {
@@ -334,7 +339,7 @@ export default {
                         fetch(`http://localhost:3010/messages/${message.idMessage}`, {
                             method: 'DELETE',
                         })
-                            .then((response) =>  response.json() )
+                            .then((response) => response.json())
                             .then((data) => {
                                 this.$store.commit('DELETE_MESSAGES', data);
                             })
@@ -344,7 +349,7 @@ export default {
                             });
                     }
                 }
-            }, 1000); // Durée de l'appui long en millisecondes (1 seconde dans cet exemple)
+            }, 500); // Durée de l'appui long en millisecondes (1 seconde dans cet exemple)
         },
         cancelLongPress() {
             clearTimeout(this.pressTimer);
@@ -352,7 +357,7 @@ export default {
         logOut() {
             window.localStorage.clear();
             // window.userPseudo = null;
-            router.replace("/");
+            router.push({name: "signInUp"});
         },
         handleKeyPress1(event) {
             if (event.keyCode === 13) {
