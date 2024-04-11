@@ -28,8 +28,8 @@ export default createStore({
         state.messages['messages'].splice(index, 1, updatedMessage);
       }
     },
-    DELETE_MESSAGES(state, idMessage){
-      state.messages['messages'] = state.messages['messages'].filter(message => message._id !== idMessage);
+    DELETE_MESSAGES(state, payload){
+      state.messages['messages'] = state.messages['messages'].filter(message => message.idMessage !== payload.idMessage);
     },
 
     // GROUPES

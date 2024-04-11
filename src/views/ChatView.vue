@@ -257,7 +257,7 @@ export default {
             })
                 .then((response) => response.json())
                 .then((data) => {
-                    document.getElementById("message").value = "";
+                    document.getElementById("message").value = null;
                     this.$store.commit('ADD_MESSAGES', data);
                     router.push('/chat');
                 })
@@ -334,10 +334,9 @@ export default {
                         fetch(`http://localhost:3010/messages/${message.idMessage}`, {
                             method: 'DELETE',
                         })
-                            .then((response) => { return response.json() })
-                            .then(() => {
-                                this.$store.commit('DELETE_MESSAGES', message.idMessage);
-                                router.push('/chat');
+                            .then((response) =>  response.json() )
+                            .then((data) => {
+                                this.$store.commit('DELETE_MESSAGES', data);
                             })
                             .catch(error => {
                                 // Gérer les erreurs ici
