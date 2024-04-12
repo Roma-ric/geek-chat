@@ -69,7 +69,7 @@
                                 <div v-if="message.idGroupe === 1 && message.pseudoUser !== currentUserPseudo">
                                     <p class="text-start my-0"> {{ message.pseudoUser }} </p>
                                     <div class="m-0 card px-2 py-1 bg-warning mb-1 col-lg-6 col-md-8 col-10 text-dark text-start"
-                                        style="border-radius: 15px;">
+                                        style="border-radius: 5px 20px 20px 20px">
                                         {{ message.texte }}
                                     </div>
                                 </div>
@@ -78,7 +78,7 @@
                                     <div @dblclick="updateMessageGroupe1($event.target.innerHTML)"
                                         @mousedown="startLongPress($event.target.innerHTML)" @mouseup="cancelLongPress"
                                         class="m-0 card px-2 py-1 bg-primary mb-1 col-lg-6 col-md-8 col-10 text-light text-end"
-                                        style="border-radius: 15px;">
+                                        style="border-radius: 20px 20px 5px 20px;">
                                         {{ message.texte }}
                                     </div>
                                 </div>
