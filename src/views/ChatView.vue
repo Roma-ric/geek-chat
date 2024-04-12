@@ -245,7 +245,7 @@ export default {
     methods: {
         sendMessageGroupe1() {
             if ((document.getElementById("message").value).trim() === "") {
-                alert("le champ est vide...");
+                alert("Le champ ne doit pas rester vide");
                 document.getElementById("message").value = null;
             } else {
                 fetch(`http://localhost:3010/messages`, {
@@ -266,7 +266,6 @@ export default {
                         router.push('/chat');
                     })
                     .catch(error => {
-                        alert("Le champ ne doit pas rester vide");
                         console.log('Error creating user:', error);
                     });
             }
