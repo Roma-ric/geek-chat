@@ -63,7 +63,8 @@
                                 class="material-symbols-outlined d-flex justify-content-center align-items-center border rounded"
                                 style="width: 40px; height: 40px;"> </span> -->
                         </div>
-                        <div style="height: 74vh;" class="m-0 overflow-auto d-flex flex-column p-2">
+                        <div id="messagesContainer" style="height: 74vh;"
+                            class="m-0 overflow-auto d-flex flex-column p-2">
                             <div v-for="message in this.$store.state.messages['messages']" :key="message.idMessage">
                                 <div v-if="message.idGroupe === 1 && message.pseudoUser !== currentUserPseudo">
                                     <p class="text-start my-0"> {{ message.pseudoUser }} </p>
@@ -264,6 +265,11 @@ export default {
                         document.getElementById("message").value = null;
                         this.$store.commit('ADD_MESSAGES', data);
                         router.push('/chat');
+
+                        // Faites défiler vers le bas du dernier message ajouté
+                        const messagesContainer = document.getElementById("messagesContainer");
+                        const lastMessage = messagesContainer.lastElementChild;
+                        lastMessage.scrollIntoView({ behavior: 'smooth', block: 'start' });
                     })
                     .catch(error => {
                         console.log('Error creating user:', error);
@@ -348,7 +354,7 @@ export default {
                             });
                     }
                 }
-            }, 500); // Durée de l'appui long en millisecondes (1 seconde dans cet exemple)
+            }, 200); // Durée de l'appui long en millisecondes (1 seconde dans cet exemple)
         },
         cancelLongPress() {
             clearTimeout(this.pressTimer);
@@ -356,7 +362,7 @@ export default {
         logOut() {
             window.localStorage.clear();
             // window.userPseudo = null;
-            router.push({name: "signInUp"});
+            router.push({ name: "signInUp" });
         },
         handleKeyPress1(event) {
             if (event.keyCode === 13) {
